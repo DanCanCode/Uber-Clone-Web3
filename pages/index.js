@@ -1,9 +1,8 @@
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
 import tw from "tailwind-styled-components";
-
-const inter = Inter({ subsets: ["latin"] });
+import Map from "./components/Map";
 
 export default function Home() {
   return (
@@ -15,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Wrapper>
-        <Map>Map</Map>
+        <Map />
         <ActionItems>Start</ActionItems>
       </Wrapper>
     </>
@@ -27,11 +26,6 @@ const Wrapper = tw.div`
   flex-col
   bg-blue-500
   h-screen
-`;
-
-const Map = tw.div`
-  flex-1
-  bg-red-500
 `;
 
 const ActionItems = tw.div`
