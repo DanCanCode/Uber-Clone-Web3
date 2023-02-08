@@ -34,7 +34,7 @@ const Search = () => {
         Saved Places
       </SavedPlaces>
 
-      {/* Search Button */}
+      <SearchButtonContainer>Confirm Location</SearchButtonContainer>
     </Wrapper>
   );
 };
@@ -98,6 +98,7 @@ const Input = tw.input`
 h-10
 bg-gray-200
 my-2
+p-2
 outline-none
 border-none
 `;
@@ -116,6 +117,7 @@ items-center
 bg-white
 px-4
 py-2
+mb-2
 `;
 
 const StarIcon = tw.img`
@@ -125,4 +127,14 @@ h-10
 p-2
 rounded-full
 mr-2
+`;
+
+const SearchButtonContainer = tw.div`
+bg-black
+text-white
+text-2xl
+text-center
+mx-4
+py-3
+cursor-pointer
 `;
