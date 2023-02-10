@@ -6,7 +6,6 @@ mapboxgl.accessToken =
   "pk.eyJ1IjoiZGFuY2FuY29kZSIsImEiOiJjbGRyem1kNXQxZ2hrM3F1dTVmenVqYXp6In0.XRKSWq6Cy5z_fw8-OVnkjQ";
 
 const Map = ({ pickup, dropoff }) => {
-  console.log(pickup, dropoff);
   useEffect(() => {
     // const mapFocus = dropoff && dropoff.length ? dropoff : [-73.8326, 40.7963];
     const map = new mapboxgl.Map({
