@@ -4,8 +4,28 @@ import Head from "next/head";
 import Image from "next/image";
 import tw from "tailwind-styled-components";
 import Map from "./components/Map";
+import { auth } from "../firebase";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+        });
+      } else {
+        setUser(null);
+        router.push("/login");
+      }
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -21,8 +41,11 @@ export default function Home() {
           <Header>
             <UberLogo src="https://logosmarcas.net/wp-content/uploads/2020/05/Uber-Logo.png" />
             <Profile>
-              <Name>John Doe</Name>
-              <UserImage src="https://i1.wp.com/twinfinite.net/wp-content/uploads/2019/11/kazuma-kiryua.jpg?fit=700%2C421&ssl=1" />
+              <Name>{user && user.name}</Name>
+              <UserImage
+                src={user && user.photoUrl}
+                onClick={() => signOut(auth)}
+              />
             </Profile>
           </Header>
           <ActionButtons>
@@ -84,10 +107,12 @@ const Name = tw.div`
 const UserImage = tw.img`
   h-20
   w-20
+  object-contain
   rounded-full
   border
   border-gray-200
   p-px
+  cursor-pointer
 `;
 
 const ActionButtons = tw.div`
