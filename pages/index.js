@@ -7,6 +7,7 @@ import Map from "./components/Map";
 import { auth } from "../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
+import Search from "./search";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -38,7 +39,9 @@ export default function Home() {
         <Map />
 
         <RideRequestContainer>
-          <RideRequest></RideRequest>
+          <RideRequest>
+            <Search />
+          </RideRequest>
         </RideRequestContainer>
         {/* <ActionItems>
          
@@ -104,7 +107,8 @@ bg-white
 rounded-lg 
 flex 
 flex-col 
-overflow-y-scroll`;
+shadow-lg
+`;
 
 const ActionItems = tw.div`
   flex-1

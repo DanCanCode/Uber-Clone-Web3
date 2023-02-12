@@ -52,7 +52,7 @@ const Confirm = () => {
     <Wrapper>
       <ButtonContainer>
         <BackButton
-          onClick={() => router.replace("/search")}
+          onClick={() => router.replace("/")}
           src="https://img.icons8.com/ios-filled/50/000000/left.png"
         />
       </ButtonContainer>
