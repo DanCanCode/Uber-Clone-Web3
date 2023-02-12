@@ -4,6 +4,7 @@ import Link from "next/link";
 import tw from "tailwind-styled-components";
 import Map from "./components/Map";
 import RideSelector from "./components/RideSelector";
+import { motion } from "framer-motion";
 
 const Confirm = () => {
   const [pickupCoordinates, setPickupCoordinates] = useState([]);
@@ -50,21 +51,18 @@ const Confirm = () => {
 
   return (
     <Wrapper>
-      <ButtonContainer>
-        <BackButton
-          onClick={() => router.replace("/")}
-          src="https://img.icons8.com/ios-filled/50/000000/left.png"
-        />
-      </ButtonContainer>
-
       <Map pickup={pickupCoordinates} dropoff={dropoffCoordinates} />
 
       <RideContainer>
+        <ButtonContainer>
+          <BackButton
+            onClick={() => router.replace("/")}
+            src="https://img.icons8.com/ios-filled/50/000000/left.png"
+          />
+        </ButtonContainer>
         <RideSelector pickup={pickupCoordinates} dropoff={dropoffCoordinates} />
 
-        <ConfirmButtonContainer>
-          <ConfirmButton>Confirm Ride</ConfirmButton>
-        </ConfirmButtonContainer>
+        <ConfirmButton whileTap={{ scale: 0.8 }}>Confirm Ride</ConfirmButton>
       </RideContainer>
     </Wrapper>
   );
@@ -76,37 +74,38 @@ const Wrapper = tw.div`
 flex 
 lg:flex-row
 flex-col
-h-screen
+h-[92.25vh]
 `;
 
 const ButtonContainer = tw.div`
-rounded-full
-absolute
-top-4
-left-4
-z-10
-bg-white
-shadow-md
+ml-2
+mt-2
 `;
 
 const BackButton = tw.img`
 h-12
 cursor-pointer
+hover:bg-neutral-200
+rounded-full
+transition-all
+duration-300
 `;
 
 const RideContainer = tw.div`
 flex-1
 flex
 flex-col
+relative
+lg:max-h-screen
+max-h-[60vh]
+lg:overflow-visible
+overflow-y-scroll
 `;
 
-const ConfirmButtonContainer = tw.div`
-
-`;
-
-const ConfirmButton = tw.div`
+const ConfirmButton = tw(motion.div)`
 bg-black
 text-white
+rounded-md
 m-4
 text-center
 py-4
