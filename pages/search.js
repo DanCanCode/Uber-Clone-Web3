@@ -1,80 +1,105 @@
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import tw from "tailwind-styled-components";
+import { FaCar } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import { motion, useCycle } from "framer-motion";
 
 const Search = () => {
-  const router = useRouter();
+  const [isOpen, toggleOpen] = useCycle(false, true);
   const [isFocused, setIsFocused] = useState("from");
   const [inputData, setInputData] = useState({
     pickup: "",
     dropoff: "",
   });
 
-  console.log(inputData);
   return (
-    <Wrapper>
-      <Heading>
-        {isFocused == "from" ? "Where can we pick you up?" : "Where to?"}
-      </Heading>
+    <Wrapper
+      onClick={() => !isOpen && toggleOpen()}
+      open={isOpen}
+      whileHover={{ scale: !isOpen ? 1.2 : 1.0 }}
+      whileTap={{ scale: !isOpen ? 0.8 : 1.0 }}
+    >
+      {isOpen ? (
+        <>
+          <CloseButton>
+            <GrClose
+              className="cursor-pointer"
+              onClick={() => toggleOpen()}
+              fontSize={28}
+            />
+          </CloseButton>
+          <Heading>
+            {isFocused == "from" ? "Where can we pick you up?" : "Where to?"}
+          </Heading>
 
-      <InputContainer>
-        <InputBox focused={isFocused == "from" && isFocused}>
-          <SvgContainer>
-            <svg viewBox="0 0 24 24" width="1em" height="1em">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M12 14a2 2 0 100-4 2 2 0 000 4zm5-2a5 5 0 11-10 0 5 5 0 0110 0z"
+          <InputContainer>
+            <InputBox focused={isFocused == "from" && isFocused}>
+              <SvgContainer>
+                <svg viewBox="0 0 24 24" width="1em" height="1em">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12 14a2 2 0 100-4 2 2 0 000 4zm5-2a5 5 0 11-10 0 5 5 0 0110 0z"
+                  />
+                </svg>
+              </SvgContainer>
+
+              <Input
+                value={inputData.pickup}
+                onChange={(e) =>
+                  setInputData({ ...inputData, pickup: e.target.value })
+                }
+                onFocus={() => setIsFocused("from")}
+                placeholder="Enter pickup location"
               />
-            </svg>
-          </SvgContainer>
+            </InputBox>
 
-          <Input
-            value={inputData.pickup}
-            onChange={(e) =>
-              setInputData({ ...inputData, pickup: e.target.value })
-            }
-            onFocus={() => setIsFocused("from")}
-            placeholder="Enter pickup location"
-          />
-        </InputBox>
+            <VerticalLine />
 
-        <VerticalLine />
+            <InputBox focused={isFocused == "to" && isFocused}>
+              <SvgContainer>
+                <svg viewBox="0 0 24 24" width="1em" height="1em">
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M14 10h-4v4h4v-4zM7 7v10h10V7H7z"
+                  />
+                </svg>
+              </SvgContainer>
 
-        <InputBox focused={isFocused == "to" && isFocused}>
-          <SvgContainer>
-            <svg viewBox="0 0 24 24" width="1em" height="1em">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M14 10h-4v4h4v-4zM7 7v10h10V7H7z"
+              <Input
+                value={inputData.dropoff}
+                onChange={(e) =>
+                  setInputData({ ...inputData, dropoff: e.target.value })
+                }
+                onFocus={() => setIsFocused("to")}
+                placeholder="Enter dropoff location"
               />
-            </svg>
-          </SvgContainer>
+            </InputBox>
+          </InputContainer>
 
-          <Input
-            value={inputData.dropoff}
-            onChange={(e) =>
-              setInputData({ ...inputData, dropoff: e.target.value })
-            }
-            onFocus={() => setIsFocused("to")}
-            placeholder="Enter dropoff location"
-          />
-        </InputBox>
-      </InputContainer>
+          <SavedPlaces>
+            <StarIcon src="https://img.icons8.com/ios-filled/50/ffffff/star--v1.png" />
+            Saved Places
+          </SavedPlaces>
 
-      <Link
-        href={{
-          pathname: "/confirm",
-          query: {
-            pickup: inputData.pickup,
-            dropoff: inputData.dropoff,
-          },
-        }}
-      >
-        <SearchButtonContainer>Confirm Location</SearchButtonContainer>
-      </Link>
+          <Link
+            href={{
+              pathname: "/confirm",
+              query: {
+                pickup: inputData.pickup,
+                dropoff: inputData.dropoff,
+              },
+            }}
+          >
+            <SearchButtonContainer>Confirm Location</SearchButtonContainer>
+          </Link>
+        </>
+      ) : (
+        <FaCar fontSize={36} />
+      )}
+
       {/* <ButtonContainer>
         <BackButton
           onClick={() => router.replace("/")}
@@ -109,10 +134,7 @@ const Search = () => {
         <PlusIcon src="https://img.icons8.com/ios/50/000000/plus-math.png" />
       </InputContainer>
 
-      <SavedPlaces>
-        <StarIcon src="https://img.icons8.com/ios-filled/50/ffffff/star--v1.png" />
-        Saved Places
-      </SavedPlaces>
+      
 
       <Link
         href={{
@@ -131,8 +153,24 @@ const Search = () => {
 
 export default Search;
 
-const Wrapper = tw.div`
-pt-2
+const Wrapper = tw(motion.div)`
+max-h-[700px] 
+bg-white 
+${(props) =>
+  props.open
+    ? "rounded-lg w-[400px] h-full"
+    : "cursor-pointer p-4 rounded-full hover:bg-neutral-200 "} 
+flex 
+flex-col 
+shadow-lg
+`;
+
+const CloseButton = tw.div`
+flex
+items-center
+justify-end
+p-4
+pb-2
 `;
 
 const Heading = tw.div`
@@ -143,13 +181,14 @@ flex
 items-center 
 text-3xl 
 p-4 
+pt-0
 overflow-hidden
 `;
 
 const InputContainer = tw.div`
 flex 
 flex-col 
-mb-4 
+mb-2 
 relative
 `;
 
@@ -182,46 +221,6 @@ left-[2.3rem]
 top-[2rem]
 `;
 
-const ButtonContainer = tw.div`
-bg-white
-px-4
-
-
-`;
-
-const BackButton = tw.img`
-h-12
-cursor-pointer
-`;
-
-const FromToIcons = tw.div`
-w-10
-flex
-flex-col
-items-center
-mr-2
-`;
-
-const Circle = tw.img`
-h-2.5
-
-`;
-
-const Line = tw.img`
-h-10
-`;
-
-const Square = tw.img`
-h-2.5
-
-`;
-
-const InputBoxes = tw.div`
-flex 
-flex-col
-flex-1
-`;
-
 const Input = tw.input`
 my-2 
 rounded-2 
@@ -233,21 +232,16 @@ h-full
 w-full
 `;
 
-const PlusIcon = tw.img`
-w-10
-h-10
-bg-gray-200
-rounded-full
-mx-3
-`;
-
 const SavedPlaces = tw.div`
 flex
 items-center
 bg-white
-px-4
-py-2
+mx-4
+p-2
 mb-2
+rounded-md
+cursor-pointer
+hover:bg-neutral-200
 `;
 
 const StarIcon = tw.img`
@@ -266,5 +260,6 @@ text-2xl
 text-center
 mx-4
 py-3
+rounded-md
 cursor-pointer
 `;

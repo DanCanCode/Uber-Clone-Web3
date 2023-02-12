@@ -8,6 +8,8 @@ import { auth } from "../firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/router";
 import Search from "./search";
+import { FaCar } from "react-icons/fa";
+import { motion, useCycle } from "framer-motion";
 
 export default function Home() {
   const [user, setUser] = useState(null);
@@ -39,9 +41,7 @@ export default function Home() {
         <Map />
 
         <RideRequestContainer>
-          <RideRequest>
-            <Search />
-          </RideRequest>
+          <Search />
         </RideRequestContainer>
         {/* <ActionItems>
          
@@ -88,26 +88,15 @@ const Wrapper = tw.div`
 
 const RideRequestContainer = tw.div`
 h-full 
-w-[400px] 
 ml-[1rem] 
 py-[3rem] 
 absolute 
 top-0 
-left-0 
+left-12
 flex 
 flex-col 
 justify-end 
 z-20
-`;
-
-const RideRequest = tw.div`
-h-full 
-max-h-[700px] 
-bg-white 
-rounded-lg 
-flex 
-flex-col 
-shadow-lg
 `;
 
 const ActionItems = tw.div`
