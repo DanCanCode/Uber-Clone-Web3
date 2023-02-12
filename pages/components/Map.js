@@ -29,11 +29,13 @@ const Map = ({ pickup, dropoff }) => {
     const marker1 = new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
   };
 
-  return <Wrapper id="map"></Wrapper>;
+  return <Wrapper id="map" />;
 };
 
 export default Map;
 
 const Wrapper = tw.div`
   flex-1
+  h-full
+  w-full
 `;

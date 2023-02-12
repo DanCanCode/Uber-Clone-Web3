@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import { FaCar, FaUtensils } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
 import { auth, provider } from "../firebase";
 
 const Login = () => {
@@ -11,6 +12,15 @@ const Login = () => {
     eat: "Discover delicious eats",
     active: "ride",
   });
+  const router = useRouter();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        router.push("/");
+      }
+    });
+  }, []);
 
   return (
     <Wrapper>

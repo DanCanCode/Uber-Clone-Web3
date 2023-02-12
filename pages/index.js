@@ -36,8 +36,12 @@ export default function Home() {
       </Head>
       <Wrapper>
         <Map />
-        <ActionItems>
-          {/* Header */}
+
+        <RideRequestContainer>
+          <RideRequest></RideRequest>
+        </RideRequestContainer>
+        {/* <ActionItems>
+         
           <Header>
             <UberLogo src="https://i.ibb.co/ZMhy8ws/uber-logo.png" />
             <Profile>
@@ -67,7 +71,7 @@ export default function Home() {
           </ActionButtons>
 
           <InputButton>Where To?</InputButton>
-        </ActionItems>
+        </ActionItems> */}
       </Wrapper>
     </>
   );
@@ -76,8 +80,31 @@ export default function Home() {
 const Wrapper = tw.div`
   flex
   flex-col
-  h-screen
+  h-[92.25vh]
 `;
+
+const RideRequestContainer = tw.div`
+h-full 
+w-[400px] 
+ml-[1rem] 
+py-[3rem] 
+absolute 
+top-0 
+left-0 
+flex 
+flex-col 
+justify-end 
+z-20
+`;
+
+const RideRequest = tw.div`
+h-full 
+max-h-[700px] 
+bg-white 
+rounded-lg 
+flex 
+flex-col 
+overflow-y-scroll`;
 
 const ActionItems = tw.div`
   flex-1

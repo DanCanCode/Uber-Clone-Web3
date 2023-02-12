@@ -13,7 +13,7 @@ const Search = () => {
   console.log(inputData);
   return (
     <Wrapper>
-      <ButtonContainer>
+      {/* <ButtonContainer>
         <BackButton
           onClick={() => router.replace("/")}
           src="https://img.icons8.com/ios-filled/50/000000/left.png"
@@ -62,7 +62,7 @@ const Search = () => {
         }}
       >
         <SearchButtonContainer>Confirm Location</SearchButtonContainer>
-      </Link>
+      </Link> */}
     </Wrapper>
   );
 };
@@ -70,8 +70,7 @@ const Search = () => {
 export default Search;
 
 const Wrapper = tw.div`
-bg-gray-200
-h-screen
+pt-2
 `;
 
 const ButtonContainer = tw.div`
