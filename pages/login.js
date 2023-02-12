@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
 import { FaCar, FaUtensils } from "react-icons/fa";
-import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase";
@@ -12,7 +11,6 @@ const Login = () => {
     eat: "Discover delicious eats",
     active: "ride",
   });
-  const router = useRouter();
 
   return (
     <Wrapper>

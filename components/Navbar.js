@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components";
-import { useRouter } from "next/router";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { auth, provider } from "../firebase";
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
-  const router = useRouter();
 
   useEffect(() => {
     return onAuthStateChanged(auth, (user) => {
@@ -15,7 +13,6 @@ const Navbar = () => {
           name: user.displayName,
           photoUrl: user.photoURL,
         });
-        router.push("/");
       } else {
         setUser(null);
       }
@@ -97,7 +94,7 @@ font-medium
 
 const Name = tw.div`
 text-white
-mr-1
+mr-2
 `;
 
 const UserImage = tw.img`
@@ -108,4 +105,5 @@ object-contain
 hover:border
 hover:border-neutral-700
 active:border-blue-500
+active:border-2
 `;
