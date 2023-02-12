@@ -54,12 +54,18 @@ const Login = () => {
             {description.active == "ride" ? (
               <>
                 <Item>{description.ride}</Item>
-                <SubText>Reach your destination in seconds.</SubText>
+                <SubText>
+                  Reach your destination in seconds. <br /> All transactions are
+                  stored on the blockchain.
+                </SubText>
               </>
             ) : (
               <>
                 <Item>{description.eat}</Item>
-                <SubText>Order delivery from restaurants you love.</SubText>
+                <SubText>
+                  Order delivery from restaurants you love. <br /> All
+                  transactions are stored on the blockchain.
+                </SubText>
               </>
             )}
             <DescriptionButton
