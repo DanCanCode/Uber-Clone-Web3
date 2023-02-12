@@ -39,7 +39,7 @@ export default function Home() {
         <ActionItems>
           {/* Header */}
           <Header>
-            <UberLogo src="https://logosmarcas.net/wp-content/uploads/2020/05/Uber-Logo.png" />
+            <UberLogo src="https://i.ibb.co/ZMhy8ws/uber-logo.png" />
             <Profile>
               <Name>{user && user.name}</Name>
               <UserImage

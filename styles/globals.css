@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "UberMove";
+  src: url("/fonts/UberMoveMedium.otf");
+  src: url("/fonts/UberMoveBold.otf");
+}
+
 body {
   margin: 0;
+  font-family: UberMove, system-ui, "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
